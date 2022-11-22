@@ -39,10 +39,10 @@ DebugLayer::DebugLayer()
         brls::sync([this, contentView, log] {
             Label* label = new Label();
             label->setText(log);
-            label->setFontSize(8);
+            label->setFontSize(12);
             label->setTextColor(RGB(255, 0, 0));
             label->setLineBottom(1);
-            label->setLineColor(RGB(255, 255, 255));
+            label->setLineColor(RGBA(255, 255, 255, 180));
             contentView->addView(label, 0);
 
             if (contentView->getChildren().size() > 50)

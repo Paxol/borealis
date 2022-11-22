@@ -30,6 +30,7 @@ enum class LogLevel
     ERROR = 0,
     WARNING,
     INFO,
+    APPDEBUG,
     DEBUG
 };
 
@@ -80,6 +81,12 @@ class Logger
     inline static void info(std::string format, Args&&... args)
     {
         Logger::log(LogLevel::INFO, "INFO", "[0;34m", format, args...);
+    }
+
+    template <typename... Args>
+    inline static void appdebug(std::string format, Args&&... args)
+    {
+        Logger::log(LogLevel::APPDEBUG, "APPDEBUG", "[0;32m", format, args...);
     }
 
     template <typename... Args>
