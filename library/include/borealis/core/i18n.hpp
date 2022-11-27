@@ -76,6 +76,12 @@ std::string getStr(std::string stringName, Args&&... args)
  */
 void loadTranslations();
 
+/**
+ * Loads all translations of the specified locale
+ * Must be called before trying to get a translation and after loadTranslations()!
+ */
+void setLocale(std::string locale);
+
 inline namespace literals
 {
     /**

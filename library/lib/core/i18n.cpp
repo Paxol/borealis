@@ -95,6 +95,11 @@ void loadTranslations()
         loadLocale(currentLocaleName, &currentLocale);
 }
 
+void setLocale(std::string locale)
+{
+    loadLocale(locale, &currentLocale);
+}
+
 namespace internal
 {
     std::string getRawStr(std::string stringName)
