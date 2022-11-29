@@ -57,6 +57,13 @@ enum class Direction
     RIGHT_TO_LEFT,
 };
 
+enum class Wrap
+{
+    NO_WRAP,
+    WRAP,
+    WRAP_REVERSE,
+};
+
 // Generic FlexBox layout
 class Box : public View
 {
@@ -165,6 +172,13 @@ class Box : public View
      * Default is INHERIT.
      */
     void setDirection(Direction direction);
+
+    /**
+     * Sets the wrapping behaviour when child nodes don't fit into a single line
+     * 
+     * Default is NO_WRAP
+    */
+   void setWrap(Wrap wrap);
 
     void setAxis(Axis axis);
     Axis getAxis() const;

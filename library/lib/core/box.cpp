@@ -84,6 +84,14 @@ Box::Box(Axis axis)
             { "spaceAround", AlignItems::SPACE_AROUND },
         });
 
+    BRLS_REGISTER_ENUM_XML_ATTRIBUTE(
+        "wrap", Wrap, this->setWrap,
+        {
+            { "noWrap", Wrap::NO_WRAP },
+            { "wrap", Wrap::WRAP },
+            { "wrapReverse", Wrap::WRAP_REVERSE },
+        });
+
     // Padding
     this->registerFloatXMLAttribute("paddingTop", [this](float value) {
         this->setPaddingTop(value);
@@ -581,6 +589,24 @@ void Box::setAlignItems(AlignItems alignment)
             break;
         case AlignItems::SPACE_AROUND:
             YGNodeStyleSetAlignItems(this->ygNode, YGAlignSpaceAround);
+            break;
+    }
+
+    this->invalidate();
+}
+
+void Box::setWrap(Wrap wrap)
+{
+    switch (wrap)
+    {
+        case Wrap::NO_WRAP:
+            YGNodeStyleSetFlexWrap(this->ygNode, YGWrapNoWrap);
+            break;
+        case Wrap::WRAP:
+            YGNodeStyleSetFlexWrap(this->ygNode, YGWrapWrap);
+            break;
+        case Wrap::WRAP_REVERSE:
+            YGNodeStyleSetFlexWrap(this->ygNode, YGWrapWrapReverse);
             break;
     }
 
