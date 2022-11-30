@@ -42,6 +42,7 @@ typedef Event<int> ValueSelectedEvent;
 class Dropdown : public Box, private RecyclerDataSource
 {
   private:
+    BRLS_BIND(Box, recyclerWrapper, "brls/dropdown/recycler_wrapper");
     BRLS_BIND(RecyclerFrame, recycler, "brls/dropdown/recycler");
     BRLS_BIND(Box, header, "brls/dropdown/header");
     BRLS_BIND(Label, title, "brls/dropdown/title_label");

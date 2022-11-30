@@ -38,7 +38,7 @@ const std::string dropdownFrameXML = R"xml(
             <brls:Box
                 id="brls/dropdown/content"
                 width="auto"
-                height="330"
+                height="auto"
                 axis="column"
                 backgroundColor="@theme/brls/background">
 
@@ -47,6 +47,7 @@ const std::string dropdownFrameXML = R"xml(
                     width="auto"
                     height="@style/brls/dropdown/header_height"
                     axis="row"
+                    backgroundColor="@theme/brls/background"
                     paddingTop="@style/brls/applet_frame/header_padding_top_bottom"
                     paddingBottom="@style/brls/applet_frame/header_padding_top_bottom"
                     paddingLeft="@style/brls/applet_frame/header_padding_sides"
@@ -66,6 +67,7 @@ const std::string dropdownFrameXML = R"xml(
                 </brls:Box>
             
                 <brls:Box
+                    id="brls/dropdown/recycler_wrapper"
                     width="auto"
                     height="auto"
                     axis="row"
@@ -117,7 +119,9 @@ Dropdown::Dropdown(std::string title, std::vector<std::string> values, ValueSele
         cell->title->setFontSize(Application::getStyle()["brls/dropdown/listItemTextSize"]);
         return cell;
     });
-    recycler->setDefaultCellFocus(IndexPath(0, selected));
+
+    int defaultSelected = selected < 0 ? 0 : min(selected, numberOfRows(recycler, 0));
+    recycler->setDefaultCellFocus(IndexPath(0, defaultSelected));
     recycler->setDataSource(this);
 
     Style style = Application::getStyle();
@@ -129,6 +133,11 @@ Dropdown::Dropdown(std::string title, std::vector<std::string> values, ValueSele
         ;
 
     content->setHeight(min(height, Application::contentHeight * 0.73f));
+
+#ifdef __SWITCH__
+    recyclerWrapper->setMarginTop(-70);
+    recyclerWrapper->setPaddingBottom(style["brls/applet_frame/footer_height"]);
+#endif
 }
 
 int Dropdown::numberOfRows(RecyclerFrame* recycler, int section)
