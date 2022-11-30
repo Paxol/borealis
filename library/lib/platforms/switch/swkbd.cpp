@@ -108,7 +108,7 @@ bool Swkbd::openForText(std::function<void(std::string)> f, std::string headerTe
 
     char buffer[0x100];
 
-    if (R_SUCCEEDED(swkbdShow(&config, buffer, 0x100)) && strcmp(buffer, "") != 0)
+    if (R_SUCCEEDED(swkbdShow(&config, buffer, 0x100)))
     {
         f(buffer);
 
